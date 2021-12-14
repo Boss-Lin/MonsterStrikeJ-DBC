@@ -25,7 +25,8 @@ spring:
 
   #MySQL設定
   spring:
-    datasource: root
+    datasource:
       url: jdbc:mysql://localhost:3306/MonsterStrike?user=root&password=123456
-      username: 123456
+      username: root
+      password: 123456
       driver-class-name: com.mysql.cj.jdbc.Driver
