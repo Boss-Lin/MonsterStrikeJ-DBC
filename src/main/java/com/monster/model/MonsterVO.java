@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 public class MonsterVO implements java.io.Serializable {
     private String M_no;
     private String M_name;
+    private String Name;
     //    private String M_pic;角色圖片，先略過
     private String M_tybe;
     private String PassiveSkill; //反陷阱能力，先略過
@@ -29,5 +30,5 @@ public class MonsterVO implements java.io.Serializable {
     private String M_pool;
     private Timestamp M_createtime;
     private Timestamp M_updatetime;
-    
+
 }
