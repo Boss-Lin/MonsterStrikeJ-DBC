@@ -10,8 +10,8 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
 
-    private static final String INSERT_SQL = "INSERT INTO MONSTER (M_name, M_tybe, M_luckySkill, M_hit, M_combatType, M_rarity, M_race, M_ftuit, M_type, M_friendskill1, M_friendskill2, M_get, M_spec, M_pool) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE_SQL = "UPDATE MONSTER SET M_name = ?, M_tybe = ?,M_luckySkill = ?,M_hit = ?, M_combatType = ?, M_rarity = ?, M_race = ?, M_ftuit = ?, M_type = ?, M_friendskill1 = ?, M_friendskill2 = ?, M_get = ?, M_spec = ?, M_pool  = ? WHERE M_no = ?";
+    private static final String INSERT_SQL = "INSERT INTO MONSTER (M_name, M_tybe, Skill_A1, Skill_A2, Skill_A3, Skill_A4, Skill_B1, Skill_B2, Skill_B3, Skill_B4, Skill_C1, Skill_C2, M_luckySkill, M_hit, M_combatType, M_rarity, M_race, M_ftuit, M_type, M_friendskill1, M_friendskill2, M_get, M_spec, M_pool) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_SQL = "UPDATE MONSTER SET M_name = ?, M_tybe = ?, Skill_A1 = ?, Skill_A2 = ?, Skill_A3 = ?, Skill_A4 = ?, Skill_B1 = ?, Skill_B2 = ?, Skill_B3 = ?, Skill_B4 = ?, Skill_C1 = ?, Skill_C2 = ?, M_luckySkill = ?, M_hit = ?, M_combatType = ?, M_rarity = ?, M_race = ?, M_ftuit = ?, M_type = ?, M_friendskill1 = ?, M_friendskill2 = ?, M_get = ?, M_spec = ?, M_pool  = ? WHERE M_no = ?";
     private static final String DELETE_SQL = "DELETE FROM MONSTER WHERE M_no = ?";
 
     private static final String Monsters_no = "SELECT * FROM VIEW_MONSTER WHERE M_no = ?";
@@ -47,18 +47,31 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
             pstmt = con.prepareStatement(INSERT_SQL, key);
             pstmt.setString(1, monsterVO.getM_name());
             pstmt.setString(2, monsterVO.getM_tybe());
-            pstmt.setString(3, monsterVO.getM_luckySkill());
-            pstmt.setString(4, monsterVO.getM_hit());
-            pstmt.setString(5, monsterVO.getM_combatType());
-            pstmt.setString(6, monsterVO.getM_rarity());
-            pstmt.setString(7, monsterVO.getM_race());
-            pstmt.setString(8, monsterVO.getM_ftuit());
-            pstmt.setString(9, monsterVO.getM_type());
-            pstmt.setString(10, monsterVO.getM_friendskill1());
-            pstmt.setString(11, monsterVO.getM_friendskill2());
-            pstmt.setString(12, monsterVO.getM_get());
-            pstmt.setString(13, monsterVO.getM_spec());
-            pstmt.setString(14, monsterVO.getM_pool());
+            pstmt.setString(3, monsterVO.getSkill_A1());
+            pstmt.setString(4, monsterVO.getSkill_A2());
+            pstmt.setString(5, monsterVO.getSkill_A3());
+            pstmt.setString(6, monsterVO.getSkill_A4());
+
+            pstmt.setString(7, monsterVO.getSkill_B1());
+            pstmt.setString(8, monsterVO.getSkill_B2());
+            pstmt.setString(9, monsterVO.getSkill_B3());
+            pstmt.setString(10, monsterVO.getSkill_B4());
+
+            pstmt.setString(11, monsterVO.getSkill_C1());
+            pstmt.setString(12, monsterVO.getSkill_C2());
+
+            pstmt.setString(13, monsterVO.getM_luckySkill());
+            pstmt.setString(14, monsterVO.getM_hit());
+            pstmt.setString(15, monsterVO.getM_combatType());
+            pstmt.setString(16, monsterVO.getM_rarity());
+            pstmt.setString(17, monsterVO.getM_race());
+            pstmt.setString(18, monsterVO.getM_ftuit());
+            pstmt.setString(19, monsterVO.getM_type());
+            pstmt.setString(20, monsterVO.getM_friendskill1());
+            pstmt.setString(21, monsterVO.getM_friendskill2());
+            pstmt.setString(22, monsterVO.getM_get());
+            pstmt.setString(23, monsterVO.getM_spec());
+            pstmt.setString(24, monsterVO.getM_pool());
 
             pstmt.executeUpdate();
 
@@ -100,19 +113,31 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
             pstmt = con.prepareStatement(UPDATE_SQL);
             pstmt.setString(1, monsterVO.getM_name());
             pstmt.setString(2, monsterVO.getM_tybe());
-            pstmt.setString(3, monsterVO.getM_luckySkill());
-            pstmt.setString(4, monsterVO.getM_hit());
-            pstmt.setString(5, monsterVO.getM_combatType());
-            pstmt.setString(6, monsterVO.getM_rarity());
-            pstmt.setString(7, monsterVO.getM_race());
-            pstmt.setString(8, monsterVO.getM_ftuit());
-            pstmt.setString(9, monsterVO.getM_type());
-            pstmt.setString(10, monsterVO.getM_friendskill1());
-            pstmt.setString(11, monsterVO.getM_friendskill2());
-            pstmt.setString(12, monsterVO.getM_get());
-            pstmt.setString(13, monsterVO.getM_spec());
-            pstmt.setString(14, monsterVO.getM_pool());
-            pstmt.setString(15, monsterVO.getM_no());
+            pstmt.setString(3, monsterVO.getSkill_A1());
+            pstmt.setString(4, monsterVO.getSkill_A2());
+            pstmt.setString(5, monsterVO.getSkill_A3());
+            pstmt.setString(6, monsterVO.getSkill_A4());
+
+            pstmt.setString(7, monsterVO.getSkill_B1());
+            pstmt.setString(8, monsterVO.getSkill_B2());
+            pstmt.setString(9, monsterVO.getSkill_B3());
+            pstmt.setString(10, monsterVO.getSkill_B4());
+
+            pstmt.setString(11, monsterVO.getSkill_C1());
+            pstmt.setString(12, monsterVO.getSkill_C2());
+            pstmt.setString(13, monsterVO.getM_luckySkill());
+            pstmt.setString(14, monsterVO.getM_hit());
+            pstmt.setString(15, monsterVO.getM_combatType());
+            pstmt.setString(16, monsterVO.getM_rarity());
+            pstmt.setString(17, monsterVO.getM_race());
+            pstmt.setString(18, monsterVO.getM_ftuit());
+            pstmt.setString(19, monsterVO.getM_type());
+            pstmt.setString(20, monsterVO.getM_friendskill1());
+            pstmt.setString(21, monsterVO.getM_friendskill2());
+            pstmt.setString(22, monsterVO.getM_get());
+            pstmt.setString(23, monsterVO.getM_spec());
+            pstmt.setString(24, monsterVO.getM_pool());
+            pstmt.setString(25, monsterVO.getM_no());
 
             pstmt.executeUpdate();
 
@@ -221,9 +246,16 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
                 vo.setM_no(rs.getString("M_no"));
                 vo.setM_name(rs.getString("Name"));
                 vo.setM_tybe(rs.getString("Tybe"));
-                vo.setPassiveSkill(rs.getString("PassiveSkill"));
-                vo.setEnergySkill(rs.getString("EnergySkill"));
-                vo.setInvolvedSkill(rs.getString("InvolvedSkill"));
+                vo.setPassiveSkill_1(rs.getString("PassiveSkill_1"));
+                vo.setPassiveSkill_2(rs.getString("PassiveSkill_2"));
+                vo.setPassiveSkill_3(rs.getString("PassiveSkill_3"));
+                vo.setPassiveSkill_4(rs.getString("PassiveSkill_4"));
+                vo.setEnergySkill_1(rs.getString("EnergySkill_1"));
+                vo.setEnergySkill_2(rs.getString("EnergySkill_2"));
+                vo.setEnergySkill_3(rs.getString("EnergySkill_3"));
+                vo.setEnergySkill_4(rs.getString("EnergySkill_4"));
+                vo.setInvolvedSkill_1(rs.getString("InvolvedSkill_1"));
+                vo.setInvolvedSkill_2(rs.getString("InvolvedSkill_2"));
                 vo.setM_luckySkill(rs.getString("LuckySkill"));
                 vo.setM_hit(rs.getString("Hit"));
                 vo.setM_combatType(rs.getString("CombatType"));
@@ -286,9 +318,16 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
                 vo.setM_no(rs.getString("M_no"));
                 vo.setM_name(rs.getString("Name"));
                 vo.setM_tybe(rs.getString("Tybe"));
-                vo.setPassiveSkill(rs.getString("PassiveSkill"));
-                vo.setEnergySkill(rs.getString("EnergySkill"));
-                vo.setInvolvedSkill(rs.getString("InvolvedSkill"));
+                vo.setPassiveSkill_1(rs.getString("PassiveSkill_1"));
+                vo.setPassiveSkill_2(rs.getString("PassiveSkill_2"));
+                vo.setPassiveSkill_3(rs.getString("PassiveSkill_3"));
+                vo.setPassiveSkill_4(rs.getString("PassiveSkill_4"));
+                vo.setEnergySkill_1(rs.getString("EnergySkill_1"));
+                vo.setEnergySkill_2(rs.getString("EnergySkill_2"));
+                vo.setEnergySkill_3(rs.getString("EnergySkill_3"));
+                vo.setEnergySkill_4(rs.getString("EnergySkill_4"));
+                vo.setInvolvedSkill_1(rs.getString("InvolvedSkill_1"));
+                vo.setInvolvedSkill_2(rs.getString("InvolvedSkill_2"));
                 vo.setM_luckySkill(rs.getString("LuckySkill"));
                 vo.setM_hit(rs.getString("Hit"));
                 vo.setM_combatType(rs.getString("CombatType"));
