@@ -42,5 +42,5 @@ public interface MonsterDAO_interface {
     public List<MonsterVO> findByPool(String M_pool);
 
     //    public List<MonsterVO> findBy(); //備用
-    public List<MonsterVO> getAllMonsters();
+    public List<MonsterVO> findByAll();
 }

@@ -303,7 +303,7 @@ public class MonsterJDBCDAO implements MonsterDAO_interface {
     }
 
     @Override
-    public List<MonsterVO> getAllMonsters() {
+    public List<MonsterVO> findByAll() {
         Connection con = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;

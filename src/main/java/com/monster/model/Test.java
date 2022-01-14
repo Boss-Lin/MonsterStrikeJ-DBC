@@ -114,7 +114,7 @@ public class Test {
 //        }
 
         /**查詢_全部*/
-//        List<MonsterVO> list = dao.getAllMonsters();
+//        List<MonsterVO> list = dao.findByAll();
 //        for (MonsterVO allMonsters : list) {
 //            System.out.println(allMonsters.getM_no() + ",");
 //            System.out.println(allMonsters.getName() + ",");
