@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MonsterJDBCDAO implements MonsterDAO_interface {
     private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost:3306/MonsterStrike?user=root&password=123456";
+    private static final String URL = "jdbc:mysql://localhost:3306/MonsterStrike";
     private static final String USER = "root";
     private static final String PASSWORD = "123456";
 
