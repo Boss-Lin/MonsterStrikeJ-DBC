@@ -1,6 +1,7 @@
 package com.monster.model;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Test {
     public static void main(String[] args) throws IOException {
@@ -114,40 +115,41 @@ public class Test {
 //        }
 
         /**查詢_全部*/
-//        List<MonsterVO> list = dao.findByAll();
-//        for (MonsterVO allMonsters : list) {
-//            System.out.println(allMonsters.getM_no() + ",");
-//            System.out.println(allMonsters.getName() + ",");
-//            System.out.println(allMonsters.getM_tybe() + ",");
-//            System.out.println(allMonsters.getPassiveSkill_1() + ",");
-//            System.out.println(allMonsters.getPassiveSkill_2() + ",");
-//            System.out.println(allMonsters.getPassiveSkill_3() + ",");
-//            System.out.println(allMonsters.getPassiveSkill_4() + ",");
-//            System.out.println(allMonsters.getEnergySkill_1() + ",");
-//            System.out.println(allMonsters.getEnergySkill_2() + ",");
-//            System.out.println(allMonsters.getEnergySkill_3() + ",");
-//            System.out.println(allMonsters.getEnergySkill_4() + ",");
-//            System.out.println(allMonsters.getInvolvedSkill_1() + ",");
-//            System.out.println(allMonsters.getInvolvedSkill_2() + ",");
-//            System.out.println(allMonsters.getM_luckySkill() + ",");
-//            System.out.println(allMonsters.getM_hit() + ",");
-//            System.out.println(allMonsters.getM_combatType() + ",");
-//            System.out.println(allMonsters.getM_rarity() + ",");
-//            System.out.println(allMonsters.getM_race() + ",");
-//            System.out.println(allMonsters.getM_ftuit() + ",");
-//            System.out.println(allMonsters.getM_type() + ",");
-//            System.out.println(allMonsters.getM_friendskill1() + ",");
-//            System.out.println(allMonsters.getM_friendskill2() + ",");
-//            System.out.println(allMonsters.getM_get() + ",");
-//            System.out.println(allMonsters.getM_spec() + ",");
-//            System.out.println(allMonsters.getM_pool() + ",");
-//            System.out.println(allMonsters.getM_createtime() + ",");
-//            System.out.println(allMonsters.getM_updatetime() + ",");
-//            System.out.println("");
-//
-//            System.out.println("成功查詢全部角色");
-//            System.out.println("---------------------");
+        List<MonsterVO> list = dao.findByAll();
+        for (MonsterVO allMonsters : list) {
+            System.out.println(allMonsters.getM_no() + ",");
+            System.out.println(allMonsters.getName() + ",");
+            System.out.println(allMonsters.getM_tybe() + ",");
+            System.out.println(allMonsters.getPassiveSkill_1() + ",");
+            System.out.println(allMonsters.getPassiveSkill_2() + ",");
+            System.out.println(allMonsters.getPassiveSkill_3() + ",");
+            System.out.println(allMonsters.getPassiveSkill_4() + ",");
+            System.out.println(allMonsters.getEnergySkill_1() + ",");
+            System.out.println(allMonsters.getEnergySkill_2() + ",");
+            System.out.println(allMonsters.getEnergySkill_3() + ",");
+            System.out.println(allMonsters.getEnergySkill_4() + ",");
+            System.out.println(allMonsters.getInvolvedSkill_1() + ",");
+            System.out.println(allMonsters.getInvolvedSkill_2() + ",");
+            System.out.println(allMonsters.getM_luckySkill() + ",");
+            System.out.println(allMonsters.getM_hit() + ",");
+            System.out.println(allMonsters.getM_combatType() + ",");
+            System.out.println(allMonsters.getM_rarity() + ",");
+            System.out.println(allMonsters.getM_race() + ",");
+            System.out.println(allMonsters.getM_ftuit() + ",");
+            System.out.println(allMonsters.getM_type() + ",");
+            System.out.println(allMonsters.getM_friendskill1() + ",");
+            System.out.println(allMonsters.getM_friendskill2() + ",");
+            System.out.println(allMonsters.getM_get() + ",");
+            System.out.println(allMonsters.getM_spec() + ",");
+            System.out.println(allMonsters.getM_pool() + ",");
+            System.out.println(allMonsters.getM_createtime() + ",");
+            System.out.println(allMonsters.getM_updatetime() + ",");
+            System.out.println("");
+
+            System.out.println("成功查詢全部角色");
+            System.out.println("---------------------");
 //        }
 
+        }
     }
 }
