@@ -1,13 +1,14 @@
 package com.games.controller;
 
+import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @RestController
 public class GameController {
@@ -24,5 +25,14 @@ public class GameController {
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
+    }
+
+    @PostMapping("/addgames")
+    public ResponseEntity<Game> createGame(@RequestBody @Valid GameRequest gameRequest) {
+        Integer gameId = gameService.createGame(gameRequest);
+
+        Game game = gameService.getGameById(gameId);
+
+        return  ResponseEntity.status(HttpStatus.CREATED).body(game);
     }
 }
