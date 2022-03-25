@@ -27,4 +27,9 @@ public class GameServiceImpl implements GameService {
     public void updateGame(Integer gameId, GameRequest gameRequest) {
         gameDao.updateGame(gameId, gameRequest);
     }
+
+    @Override
+    public void deleteGameById(Integer gameId) {
+        gameDao.deleteGameById(gameId);
+    }
 }

@@ -9,4 +9,6 @@ public interface GameService {
     Integer createGame(GameRequest gameRequest);
 
     void updateGame(Integer gameId, GameRequest gameRequest);
+
+    void deleteGameById(Integer gameId);
 }

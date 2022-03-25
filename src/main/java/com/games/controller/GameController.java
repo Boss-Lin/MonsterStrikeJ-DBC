@@ -52,4 +52,11 @@ public class GameController {
 
         return ResponseEntity.status(HttpStatus.OK).body(updateGame);
     }
+
+    @DeleteMapping("/deletegames/{gameId}")
+    public ResponseEntity<?> deleteGame(@PathVariable Integer gameId) {
+        gameService.deleteGameById(gameId);
+
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    }
 }

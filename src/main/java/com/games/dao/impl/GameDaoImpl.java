@@ -78,5 +78,15 @@ public class GameDaoImpl implements GameDao {
 
         namedParameterJdbcTemplate.update(sql, map);
     }
+
+    @Override
+    public void deleteGameById(Integer gameId) {
+        String sql = "DELETE FROM game WHERE game_id = :gameId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("gameId", gameId);
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
 }
 

@@ -11,4 +11,5 @@ public interface GameDao {
 
     void updateGame(Integer gameId, GameRequest gameRequest);
 
+    void deleteGameById(Integer gameId);
 }
