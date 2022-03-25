@@ -8,4 +8,7 @@ public interface GameDao {
     Game getGameById(Integer gameId);
 
     Integer createGame(GameRequest gameRequest);
+
+    void updateGame(Integer gameId, GameRequest gameRequest);
+
 }

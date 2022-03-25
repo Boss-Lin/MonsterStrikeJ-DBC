@@ -22,4 +22,9 @@ public class GameServiceImpl implements GameService {
     public Integer createGame(GameRequest gameRequest) {
         return gameDao.createGame(gameRequest);
     }
+
+    @Override
+    public void updateGame(Integer gameId, GameRequest gameRequest) {
+        gameDao.updateGame(gameId, gameRequest);
+    }
 }

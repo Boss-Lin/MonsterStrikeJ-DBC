@@ -7,4 +7,6 @@ public interface GameService {
     Game getGameById(Integer ID);
 
     Integer createGame(GameRequest gameRequest);
+
+    void updateGame(Integer gameId, GameRequest gameRequest);
 }

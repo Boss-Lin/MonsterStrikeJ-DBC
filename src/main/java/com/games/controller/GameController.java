@@ -35,4 +35,21 @@ public class GameController {
 
         return  ResponseEntity.status(HttpStatus.CREATED).body(game);
     }
+
+    @PutMapping("/updategames/{gameId}")
+    public ResponseEntity<Game> updateGame(@PathVariable Integer gameId, @RequestBody @Valid GameRequest gameRequest) {
+
+        //檢查game是否存在
+        Game game = gameService.getGameById(gameId);
+        if (game == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+        ///修改Game的數據
+        gameService.updateGame(gameId, gameRequest);
+
+        Game updateGame = gameService.getGameById(gameId);//更新後查看更新後的資料
+
+        return ResponseEntity.status(HttpStatus.OK).body(updateGame);
+    }
 }

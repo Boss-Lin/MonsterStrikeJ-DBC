@@ -61,5 +61,22 @@ public class GameDaoImpl implements GameDao {
 
         return gameId;
     }
+
+    @Override
+    public void updateGame(Integer gameId, GameRequest gameRequest) {
+        String sql = "UPDATE monsterstrike.game SET game_name = :gameName, game_lavel = :gameLavel, create_by = :createBY, update_by = :updateBY WHERE game_id = :gameId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("gameId", gameId);
+
+        map.put("gameName", gameRequest.getGameName());
+        map.put("gameLavel", gameRequest.getGameLavel());
+        map.put("createBY", gameRequest.getCreateBY());
+        map.put("updateBY", gameRequest.getUpdateBY());
+
+//        map.put("updateTime", new Date());
+
+        namedParameterJdbcTemplate.update(sql, map);
+    }
 }
 
