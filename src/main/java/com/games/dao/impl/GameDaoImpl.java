@@ -45,7 +45,7 @@ public class GameDaoImpl implements GameDao {
 
         Map<String, Object> map = new HashMap<>();
         map.put("gameName", gameRequest.getGameName());
-        map.put("gameLavel", gameRequest.getGameLavel());
+        map.put("gameLavel", gameRequest.getGameLavel().toString());
         map.put("createBY", gameRequest.getCreateBY());
         map.put("updateBY", gameRequest.getUpdateBY());
 
@@ -70,7 +70,7 @@ public class GameDaoImpl implements GameDao {
         map.put("gameId", gameId);
 
         map.put("gameName", gameRequest.getGameName());
-        map.put("gameLavel", gameRequest.getGameLavel());
+        map.put("gameLavel", gameRequest.getGameLavel().toString());
         map.put("createBY", gameRequest.getCreateBY());
         map.put("updateBY", gameRequest.getUpdateBY());
 

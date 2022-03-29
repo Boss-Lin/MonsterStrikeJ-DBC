@@ -1,5 +1,6 @@
 package com.games.rowmapper;
 
+import com.games.constant.GameCategory;
 import com.games.model.Game;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -14,7 +15,13 @@ public class GameRowmapper implements RowMapper<Game> {
 
         game.setGameId(resultSet.getInt("game_id"));
         game.setGameName(resultSet.getString("game_name"));
-        game.setGameLavel(resultSet.getString("game_lavel"));
+
+        String categoryStr = resultSet.getString("game_lavel");
+        GameCategory category = GameCategory.valueOf(categoryStr);
+        game.setGameLavel(category);
+
+        //        game.setGameLavel(GameCategory.valueOf(resultSet.getString("game_lavel")));
+
         game.setCreateBY(resultSet.getString("create_by"));
         game.setCreateTime(resultSet.getTimestamp("create_time"));
         game.setUpdateBY(resultSet.getString("update_by"));

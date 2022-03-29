@@ -1,5 +1,6 @@
 package com.games.dto;
 
+import com.games.constant.GameCategory;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,7 +19,7 @@ public class GameRequest {
     private String gameName;
 
     @NotNull
-    private String gameLavel;
+    private GameCategory gameLavel;
 
     @NotNull
     private String createBY;
