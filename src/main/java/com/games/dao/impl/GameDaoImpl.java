@@ -37,6 +37,9 @@ public class GameDaoImpl implements GameDao {
             sql = sql + " AND game_name LIKE :search";
             map.put("search", "%" + gameQueryParams.getSearch() + "%");
         }
+
+        sql = sql + " ORDER BY " + gameQueryParams.getOrderBy() + " " + gameQueryParams.getSort();
+
         List<Game> gameList = namedParameterJdbcTemplate.query(sql, map, new GameRowmapper());
 
         return gameList;

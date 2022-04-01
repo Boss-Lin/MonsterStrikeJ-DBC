@@ -10,5 +10,7 @@ public class GameQueryParams {
 
     private GameCategory gameLavel;
     private String search;
+    private String orderBy;
+    private String sort;
 
 }

@@ -20,12 +20,19 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/games")
-    public ResponseEntity<List<Game>> getGames
-            (@RequestParam(required = false) GameCategory gameLavel,
-             @RequestParam(required = false) String search) {
+    public ResponseEntity<List<Game>> getGames(
+            //查詢條件 Filtering
+            @RequestParam(required = false) GameCategory gameLavel,
+            @RequestParam(required = false) String search,
+
+            //排序 Sorting
+            @RequestParam(defaultValue = "create_time") String orderBy,
+            @RequestParam(defaultValue = "desc") String sort) {
         GameQueryParams gameQueryParams = new GameQueryParams();
         gameQueryParams.setGameLavel(gameLavel);
         gameQueryParams.setSearch(search);
+        gameQueryParams.setOrderBy(orderBy);
+        gameQueryParams.setSort(sort);
 
         List<Game> gameList= gameService.getGames(gameQueryParams);
 
