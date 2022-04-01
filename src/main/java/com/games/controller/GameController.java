@@ -1,6 +1,7 @@
 package com.games.controller;
 
 import com.games.constant.GameCategory;
+import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.service.GameService;
@@ -22,7 +23,11 @@ public class GameController {
     public ResponseEntity<List<Game>> getGames
             (@RequestParam(required = false) GameCategory gameLavel,
              @RequestParam(required = false) String search) {
-        List<Game> gameList= gameService.getGames(gameLavel, search);
+        GameQueryParams gameQueryParams = new GameQueryParams();
+        gameQueryParams.setGameLavel(gameLavel);
+        gameQueryParams.setSearch(search);
+
+        List<Game> gameList= gameService.getGames(gameQueryParams);
 
         return ResponseEntity.status(HttpStatus.OK).body(gameList);
     }

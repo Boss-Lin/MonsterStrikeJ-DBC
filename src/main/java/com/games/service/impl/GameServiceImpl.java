@@ -1,7 +1,7 @@
 package com.games.service.impl;
 
-import com.games.constant.GameCategory;
 import com.games.dao.GameDao;
+import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.service.GameService;
@@ -17,8 +17,8 @@ public class GameServiceImpl implements GameService {
     private GameDao gameDao;
 
     @Override
-    public List<Game> getGames(GameCategory gameLavel, String search) {
-        return gameDao.getGames(gameLavel, search);
+    public List<Game> getGames(GameQueryParams gameQueryParams) {
+        return gameDao.getGames(gameQueryParams);
     }
 
     @Override

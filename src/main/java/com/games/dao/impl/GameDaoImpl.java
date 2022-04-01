@@ -1,7 +1,7 @@
 package com.games.dao.impl;
 
-import com.games.constant.GameCategory;
 import com.games.dao.GameDao;
+import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.rowmapper.GameRowmapper;
@@ -12,8 +12,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
-import javax.swing.plaf.basic.BasicTreeUI;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,19 +23,19 @@ public class GameDaoImpl implements GameDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Game> getGames(GameCategory gameLavel, String search) {
+    public List<Game> getGames(GameQueryParams gameQueryParams) {
         String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
-        if (gameLavel != null) {
+        if (gameQueryParams.getGameLavel() != null) {
             sql = sql + " AND game_lavel = :gameLavel";
-            map.put("gameLavel", gameLavel.name());
+            map.put("gameLavel", gameQueryParams.getGameLavel().name());
         }
 
-        if (search != null) {
+        if (gameQueryParams.getSearch() != null) {
             sql = sql + " AND game_name LIKE :search";
-            map.put("search", "%" + search + "%");
+            map.put("search", "%" + gameQueryParams.getSearch() + "%");
         }
         List<Game> gameList = namedParameterJdbcTemplate.query(sql, map, new GameRowmapper());
 
