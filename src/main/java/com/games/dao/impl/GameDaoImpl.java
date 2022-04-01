@@ -1,5 +1,6 @@
 package com.games.dao.impl;
 
+import com.games.constant.GameCategory;
 import com.games.dao.GameDao;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
@@ -24,8 +25,28 @@ public class GameDaoImpl implements GameDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public List<Game> getGames(GameCategory gameLavel, String search) {
+        String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        if (gameLavel != null) {
+            sql = sql + " AND game_lavel = :gameLavel";
+            map.put("gameLavel", gameLavel.name());
+        }
+
+        if (search != null) {
+            sql = sql + " AND game_name LIKE :search";
+            map.put("search", "%" + search + "%");
+        }
+        List<Game> gameList = namedParameterJdbcTemplate.query(sql, map, new GameRowmapper());
+
+        return gameList;
+    }
+
+    @Override
     public Game getGameById(Integer gameId) {
-        String sql = "select game_id, game_name, game_lavel, create_by, create_time, update_by, update_time from game where game_id = :gameId";
+        String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE game_id = :gameId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("gameId", gameId);

@@ -1,5 +1,6 @@
 package com.games.service.impl;
 
+import com.games.constant.GameCategory;
 import com.games.dao.GameDao;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
@@ -7,11 +8,18 @@ import com.games.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class GameServiceImpl implements GameService {
 
     @Autowired
     private GameDao gameDao;
+
+    @Override
+    public List<Game> getGames(GameCategory gameLavel, String search) {
+        return gameDao.getGames(gameLavel, search);
+    }
 
     @Override
     public Game getGameById(Integer gameId) {

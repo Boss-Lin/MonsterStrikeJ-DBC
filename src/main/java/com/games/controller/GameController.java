@@ -1,5 +1,6 @@
 package com.games.controller;
 
+import com.games.constant.GameCategory;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.service.GameService;
@@ -9,12 +10,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 public class GameController {
 
     @Autowired
     private GameService gameService;
+
+    @GetMapping("/games")
+    public ResponseEntity<List<Game>> getGames
+            (@RequestParam(required = false) GameCategory gameLavel,
+             @RequestParam(required = false) String search) {
+        List<Game> gameList= gameService.getGames(gameLavel, search);
+
+        return ResponseEntity.status(HttpStatus.OK).body(gameList);
+    }
 
     @GetMapping("/games/{gameId}")
     public ResponseEntity<Game> getGame(@PathVariable Integer gameId) {
