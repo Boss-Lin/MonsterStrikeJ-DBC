@@ -1,0 +1,128 @@
+# MonsterStrike
+# MANAGER測試成功
+# SQL指令
+Drop table IF EXISTS USER;
+Drop table IF EXISTS USER_seq;
+Drop table IF EXISTS PERMISSION_OWNER;
+Drop table IF EXISTS MANAGER;
+Drop table IF EXISTS MANAGER_seq;
+Drop table IF EXISTS PERMISSION;
+Drop table IF EXISTS PERMISSION_seq;
+DROP VIEW  IF EXISTS view_manager;
+
+---------------------------------------------------
+#權限PERMISSION
+CREATE TABLE PERMISSION_seq
+(
+	PM_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE PERMISSION (
+    PM_no 	VARCHAR(20) NOT NULL PRIMARY KEY DEFAULT '0',
+    PM_name VARCHAR(20) NOT NULL,
+    PM_spec VARCHAR(20)
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_PERMISSION_insert
+BEFORE INSERT ON PERMISSION
+FOR EACH ROW
+BEGIN
+  INSERT INTO PERMISSION_seq VALUES (NULL);
+  SET NEW.PM_no = CONCAT('PM', LPAD(LAST_INSERT_ID(), 3, '0'));
+END$$
+DELIMITER ;
+
+INSERT INTO PERMISSION (PM_name, PM_spec) VALUES ('開發者', '我最大');
+INSERT INTO PERMISSION (PM_name, PM_spec) VALUES ('網站管理者', '我老二');
+INSERT INTO PERMISSION (PM_name, PM_spec) VALUES ('小編', '我老三');
+INSERT INTO PERMISSION (PM_name, PM_spec) VALUES ('斗內使用者', '乾爹');
+INSERT INTO PERMISSION (PM_name, PM_spec) VALUES ('一般使用者', '平名百姓');
+
+---------------------------------------------------
+#使用者
+CREATE TABLE USER_seq
+(
+	MG_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE USER (
+    US_no VARCHAR(20) NOT NULL PRIMARY KEY DEFAULT '0',
+    US_email VARCHAR(20) NOT NULL,
+    US_password VARCHAR(20) NOT NULL,
+    US_name VARCHAR(20) NOT NULL,
+    US_title VARCHAR(20) NOT NULL,
+    US_line VARCHAR(20) ,
+	-- US_spec VARCHAR(45), 
+    US_createtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    US_updatetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_USER_insert
+BEFORE INSERT ON USER
+FOR EACH ROW
+BEGIN
+  INSERT INTO USER_seq VALUES (NULL);
+  SET NEW.US_no = CONCAT('US', LPAD(LAST_INSERT_ID(), 4, '0'));
+END$$
+DELIMITER ;
+
+INSERT INTO USER (US_email,  US_password, US_name, US_title, US_line) VALUES ('bbosstw@gmail.com', 'aa4731073', '大翔', 'PM_001', 'siang5032');
+
+------------------------------------
+#管理員MANAGER
+CREATE TABLE MANAGER_seq
+(
+	MG_no INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
+CREATE TABLE MANAGER (
+    MG_no VARCHAR(20) NOT NULL PRIMARY KEY DEFAULT '0',
+    MG_email VARCHAR(20) NOT NULL,
+    MG_password VARCHAR(20) NOT NULL,
+    MG_name VARCHAR(20) NOT NULL,
+	MG_title VARCHAR(20) NOT NULL,
+    Line_id VARCHAR(20) ,
+    Line_url VARCHAR(20) ,
+    MG_createtime TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    MG_updatetime TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL
+    
+);
+
+DELIMITER $$
+CREATE TRIGGER tg_MANAGER_insert
+BEFORE INSERT ON MANAGER
+FOR EACH ROW
+BEGIN
+  INSERT INTO MANAGER_seq VALUES (NULL);
+  SET NEW.MG_no = CONCAT('MG', LPAD(LAST_INSERT_ID(), 3, '0'));
+END$$
+DELIMITER ;
+
+INSERT INTO MANAGER (MG_email, MG_password, MG_name, MG_title, Line_id, Line_url) VALUES ('123456@gmail.com', '123456', '大翔', 'PM001', '123456', null);
+INSERT INTO MANAGER (MG_email, MG_password, MG_name, MG_title, Line_id, Line_url) VALUES ('654321@gmail.com', '654321', '小翔', 'PM002', null, null);
+
+---------------------------------------------------
+#View表 權限
+CREATE OR REPLACE VIEW view_manager (
+MG_no, MG_email, MG_password, MG_name, PM_name, Line_id, Line_url, MG_createtime, MG_updatetime) AS
+SELECT 
+a.MG_no, a.MG_email, a.MG_password, a.MG_name, b.PM_name, a.Line_id, a.Line_url, a.MG_createtime, a.MG_updatetime
+FROM manager a
+INNER JOIN permission b 		ON a.MG_title = b.PM_no
+
+order by MG_no asc
+;
+------------------------------------
+-- #權限擁有者PERMISSION_OWNER
+-- CREATE TABLE PERMISSION_OWNER (
+--     MG_no VARCHAR(20) NOT NULL,
+--     PM_no VARCHAR(20) NOT NULL,
+--     PRIMARY KEY (PM_NO,MG_NO),
+--   FOREIGN KEY (MG_no) REFERENCES MANAGER (MG_no),
+--   FOREIGN KEY (PM_no) REFERENCES PERMISSION (PM_no)
+-- );
+
+-- INSERT INTO PERMISSION_OWNER ( MG_NO, PM_NO) VALUES ('MG001','PM001');
+-- INSERT INTO PERMISSION_OWNER ( MG_NO, PM_NO) VALUES ('MG002','PM002');
