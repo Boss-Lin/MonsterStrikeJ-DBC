@@ -68,7 +68,7 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
-        ///修改Game的數據
+        //修改Game的數據
         gameService.updateGame(gameId, gameRequest);
 
         Game updateGame = gameService.getGameById(gameId);//更新後查看更新後的資料
