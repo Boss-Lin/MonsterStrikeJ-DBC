@@ -22,9 +22,9 @@ public class GameRequest {
     private GameCategory gameLavel;
 
     @NotNull
-    private String createBY;
+    private Integer createBY;
 
     @NotNull
-    private String updateBY;
+    private Integer updateBY;
 
 }

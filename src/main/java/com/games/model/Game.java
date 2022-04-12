@@ -12,8 +12,8 @@ public class Game {
     private Integer gameId;
     private String gameName;
     private GameCategory gameLavel;
-    private String createBY;
+    private Integer createBY;
     private Timestamp createTime;
-    private String updateBY;
+    private Integer updateBY;
     private Timestamp updateTime;
 }
