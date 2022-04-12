@@ -24,7 +24,7 @@ public class GameDaoImpl implements GameDao {
 
     @Override
     public List<Game> getGames(GameQueryParams gameQueryParams) {
-        String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE 1=1";
+        String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM view_game WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
@@ -47,7 +47,7 @@ public class GameDaoImpl implements GameDao {
 
     @Override
     public Game getGameById(Integer gameId) {
-        String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE game_id = :gameId";
+        String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM view_game WHERE game_id = :gameId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("gameId", gameId);
