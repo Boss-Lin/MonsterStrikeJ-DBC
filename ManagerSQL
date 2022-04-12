@@ -3,7 +3,6 @@ Drop table IF EXISTS manager;
 Drop table IF EXISTS permission;
 Drop table IF EXISTS permission_seq;
 DROP VIEW  IF EXISTS view_manager;
-DROP VIEW  IF EXISTS view_user;
 
 ---------------------------------------------------
 #權限PERMISSION
