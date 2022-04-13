@@ -21,7 +21,6 @@ public class GameRequest {
     @NotNull
     private GameCategory gameLavel;
 
-    @NotNull
     private Integer createBY;
 
     @NotNull
