@@ -4,12 +4,15 @@ import com.games.constant.GameCategory;
 import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
+import com.games.model.ViewGame;
 
 import java.util.List;
 
 public interface GameDao {
 
     List<Game> getGames(GameQueryParams gameQueryParams);
+
+    List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
     Game getGameById(Integer gameId);
 

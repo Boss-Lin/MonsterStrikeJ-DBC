@@ -4,6 +4,7 @@ import com.games.constant.GameCategory;
 import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
+import com.games.model.ViewGame;
 import com.games.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

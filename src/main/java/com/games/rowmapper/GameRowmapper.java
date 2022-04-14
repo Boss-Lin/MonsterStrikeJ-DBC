@@ -22,11 +22,13 @@ public class GameRowmapper implements RowMapper<Game> {
 
         //        game.setGameLavel(GameCategory.valueOf(resultSet.getString("game_lavel")));
 
-        game.setCreateBY(resultSet.getInt("create_by"));
+//        game.setCreateBY(resultSet.getInt("create_by"));
         game.setCreateTime(resultSet.getTimestamp("create_time"));
-        game.setUpdateBY(resultSet.getInt("update_by"));
+//        game.setUpdateBY(resultSet.getInt("update_by"));
         game.setUpdateTime(resultSet.getTimestamp("update_time"));
 
+        game.setCreateName(resultSet.getString("create_name"));
+        game.setUpdateName(resultSet.getString("update_name"));
         return game;
     }
 }
