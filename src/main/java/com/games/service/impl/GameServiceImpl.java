@@ -17,15 +17,15 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameDao gameDao;
 
-    @Override
-    public List<Game> getGames(GameQueryParams gameQueryParams) {
-        return gameDao.getGames(gameQueryParams);
-    }
-
 //    @Override
-//    public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
-//        return gameDao.getViewGames(gameQueryParams);
+//    public List<Game> getGames(GameQueryParams gameQueryParams) {
+//        return gameDao.getGames(gameQueryParams);
 //    }
+
+    @Override
+    public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
+        return gameDao.getViewGames(gameQueryParams);
+    }
 
     @Override
     public Game getGameById(Integer gameId) {

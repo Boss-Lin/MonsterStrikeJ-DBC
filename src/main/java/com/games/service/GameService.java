@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface GameService {
 
-    List<Game> getGames(GameQueryParams gameQueryParams);
+//    List<Game> getGames(GameQueryParams gameQueryParams);
 
-//    List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
+    List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
     Game getGameById(Integer ID);
 

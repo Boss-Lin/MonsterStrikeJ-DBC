@@ -4,7 +4,9 @@ import com.games.dao.GameDao;
 import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
+import com.games.model.ViewGame;
 import com.games.rowmapper.GameRowmapper;
+import com.games.rowmapper.ViewGameRowmapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,8 +25,8 @@ public class GameDaoImpl implements GameDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Game> getGames(GameQueryParams gameQueryParams) {
-        String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE 1=1";
+    public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
+        String sql ="SELECT game_id, game_name, game_lavel, create_name, create_time, update_name, update_time FROM monsterstrike.view_game WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
@@ -40,10 +42,11 @@ public class GameDaoImpl implements GameDao {
 
         sql = sql + " ORDER BY " + gameQueryParams.getOrderBy() + " " + gameQueryParams.getSort();
 
-        List<Game> gameList = namedParameterJdbcTemplate.query(sql, map, new GameRowmapper());
+        List<ViewGame> viewGameList = namedParameterJdbcTemplate.query(sql, map, new ViewGameRowmapper());
 
-        return gameList;
+        return viewGameList;
     }
+
 
     @Override
     public Game getGameById(Integer gameId) {

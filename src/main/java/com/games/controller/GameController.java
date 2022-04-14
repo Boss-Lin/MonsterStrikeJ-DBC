@@ -21,7 +21,7 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/games")
-    public ResponseEntity<List<Game>> getGames(
+    public ResponseEntity<List<ViewGame>> getGames(
             //查詢條件 Filtering
             @RequestParam(required = false) GameCategory gameLavel,
             @RequestParam(required = false) String search,
@@ -35,9 +35,9 @@ public class GameController {
         gameQueryParams.setOrderBy(orderBy);
         gameQueryParams.setSort(sort);
 
-        List<Game> gameList= gameService.getGames(gameQueryParams);
+        List<ViewGame> viewGameList= gameService.getViewGames(gameQueryParams);
 
-        return ResponseEntity.status(HttpStatus.OK).body(gameList);
+        return ResponseEntity.status(HttpStatus.OK).body(viewGameList);
     }
 
     @GetMapping("/games/{gameId}")

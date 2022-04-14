@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface GameDao {
 
-    List<Game> getGames(GameQueryParams gameQueryParams);
+//    List<Game> getGames(GameQueryParams gameQueryParams);
 
     List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
