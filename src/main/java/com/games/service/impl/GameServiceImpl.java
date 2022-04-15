@@ -28,6 +28,11 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public ViewGame getViewGameById(Integer gameId) {
+        return gameDao.getViewGameById(gameId);
+    }
+
+    @Override
     public Game getGameById(Integer gameId) {
         return gameDao.getGameById(gameId);
     }

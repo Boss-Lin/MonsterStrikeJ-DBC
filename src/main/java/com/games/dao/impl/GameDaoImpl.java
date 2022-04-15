@@ -47,6 +47,21 @@ public class GameDaoImpl implements GameDao {
         return viewGameList;
     }
 
+    @Override
+    public ViewGame getViewGameById(Integer gameId) {
+        String sql = "SELECT game_id, game_name, game_lavel, create_name, create_time, update_name, update_time FROM monsterstrike.view_game WHERE game_id = :gameId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("gameId", gameId);
+
+        List<ViewGame> viewGameList = namedParameterJdbcTemplate.query(sql, map, new ViewGameRowmapper());
+
+        if (viewGameList.size() > 0 ) {
+            return viewGameList.get(0);
+        } else {
+            return null;
+        }
+    }
 
     @Override
     public Game getGameById(Integer gameId) {

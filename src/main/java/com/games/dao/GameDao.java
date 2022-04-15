@@ -14,6 +14,8 @@ public interface GameDao {
 
     List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
+    ViewGame getViewGameById(Integer gameId);
+
     Game getGameById(Integer gameId);
 
     Integer createGame(GameRequest gameRequest);

@@ -41,15 +41,26 @@ public class GameController {
     }
 
     @GetMapping("/games/{gameId}")
-    public ResponseEntity<Game> getGame(@PathVariable Integer gameId) {
-        Game game = gameService.getGameById(gameId);
+    public ResponseEntity<ViewGame> getGame(@PathVariable Integer gameId) {
+        ViewGame viewGame = gameService.getViewGameById(gameId);
 
-        if (game != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(game);
+        if (viewGame != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(viewGame);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+//    @GetMapping("/games/{gameId}")
+//    public ResponseEntity<Game> getGame(@PathVariable Integer gameId) {
+//        Game game = gameService.getGameById(gameId);
+//
+//        if (game != null) {
+//            return ResponseEntity.status(HttpStatus.OK).body(game);
+//        } else {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+//        }
+//    }
 
     @PostMapping("/addgames")
     public ResponseEntity<Game> createGame(@RequestBody @Valid GameRequest gameRequest) {

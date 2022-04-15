@@ -13,6 +13,8 @@ public interface GameService {
 
     List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
+    ViewGame getViewGameById(Integer ID);
+
     Game getGameById(Integer ID);
 
     Integer createGame(GameRequest gameRequest);
