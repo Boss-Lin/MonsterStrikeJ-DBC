@@ -67,6 +67,11 @@ public class GameDaoImpl implements GameDao {
     public Game getGameById(Integer gameId) {
         String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE game_id = :gameId";
 
+//        String sql = "SELECT a.game_id, a.game_name, a.game_lavel, b.M_name, a.create_time, c.M_name, a.update_time FROM  game a" +
+//                " INNER JOIN manager b ON a.create_by = b.M_id" +
+//                " INNER JOIN manager c ON a.update_by = c.M_id" +
+//                " WHERE game_id = :gameId";
+
         Map<String, Object> map = new HashMap<>();
         map.put("gameId", gameId);
 
