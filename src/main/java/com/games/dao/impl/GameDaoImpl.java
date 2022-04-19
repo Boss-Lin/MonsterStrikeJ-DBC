@@ -30,6 +30,7 @@ public class GameDaoImpl implements GameDao {
 
         Map<String, Object> map = new HashMap<>();
 
+        //查詢條件
         if (gameQueryParams.getGameLavel() != null) {
             sql = sql + " AND game_lavel = :gameLavel";
             map.put("gameLavel", gameQueryParams.getGameLavel().name());
@@ -40,7 +41,13 @@ public class GameDaoImpl implements GameDao {
             map.put("search", "%" + gameQueryParams.getSearch() + "%");
         }
 
+        //排序
         sql = sql + " ORDER BY " + gameQueryParams.getOrderBy() + " " + gameQueryParams.getSort();
+
+        //分頁
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", gameQueryParams.getLimit());
+        map.put("offset", gameQueryParams.getOffset());
 
         List<ViewGame> viewGameList = namedParameterJdbcTemplate.query(sql, map, new ViewGameRowmapper());
 

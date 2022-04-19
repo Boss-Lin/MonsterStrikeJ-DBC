@@ -9,11 +9,15 @@ import com.games.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import java.util.List;
 
+@Validated
 @RestController
 public class GameController {
 
@@ -28,12 +32,22 @@ public class GameController {
 
             //排序 Sorting
             @RequestParam(defaultValue = "create_time") String orderBy,
-            @RequestParam(defaultValue = "desc") String sort) {
+            @RequestParam(defaultValue = "desc") String sort,
+
+            //分頁 Pagination
+            //取得幾筆資料
+            @RequestParam(defaultValue = "5") @Max(1000) @Min(0) Integer limit,
+            //跳過多少筆資料
+            @RequestParam(defaultValue = "0") @Min(0) Integer offset
+
+            ) {
         GameQueryParams gameQueryParams = new GameQueryParams();
         gameQueryParams.setGameLavel(gameLavel);
         gameQueryParams.setSearch(search);
         gameQueryParams.setOrderBy(orderBy);
         gameQueryParams.setSort(sort);
+        gameQueryParams.setLimit(limit);
+        gameQueryParams.setOffset(offset);
 
         List<ViewGame> viewGameList= gameService.getViewGames(gameQueryParams);
 
