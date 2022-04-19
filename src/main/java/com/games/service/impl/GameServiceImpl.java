@@ -22,6 +22,12 @@ public class GameServiceImpl implements GameService {
 //        return gameDao.getGames(gameQueryParams);
 //    }
 
+
+    @Override
+    public Integer countGames(GameQueryParams gameQueryParams) {
+        return gameDao.countGames(gameQueryParams);
+    }
+
     @Override
     public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
         return gameDao.getViewGames(gameQueryParams);

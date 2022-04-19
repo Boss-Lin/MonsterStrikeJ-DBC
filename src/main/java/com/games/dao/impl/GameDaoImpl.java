@@ -25,6 +25,28 @@ public class GameDaoImpl implements GameDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
+    public Integer countGames(GameQueryParams gameQueryParams) {
+        String sql = "SELECT count(*) FROM view_game WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        //查詢條件
+        if (gameQueryParams.getGameLavel() != null) {
+            sql = sql + " AND game_lavel = :gameLavel";
+            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+        }
+
+        if (gameQueryParams.getSearch() != null) {
+            sql = sql + " AND game_name LIKE :search";
+            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+        }
+
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return total;
+    }
+
+    @Override
     public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
         String sql ="SELECT game_id, game_name, game_lavel, create_name, create_time, update_name, update_time FROM monsterstrike.view_game WHERE 1=1";
 

@@ -12,6 +12,8 @@ public interface GameDao {
 
 //    List<Game> getGames(GameQueryParams gameQueryParams);
 
+    Integer countGames(GameQueryParams gameQueryParams);
+
     List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
     ViewGame getViewGameById(Integer gameId);

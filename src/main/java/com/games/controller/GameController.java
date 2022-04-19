@@ -6,6 +6,7 @@ import com.games.dto.GameRequest;
 import com.games.model.Game;
 import com.games.model.ViewGame;
 import com.games.service.GameService;
+import com.games.util.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class GameController {
     private GameService gameService;
 
     @GetMapping("/games")
-    public ResponseEntity<List<ViewGame>> getGames(
+    public ResponseEntity<Page<ViewGame>> getGames(
             //查詢條件 Filtering
             @RequestParam(required = false) GameCategory gameLavel,
             @RequestParam(required = false) String search,
@@ -49,9 +50,20 @@ public class GameController {
         gameQueryParams.setLimit(limit);
         gameQueryParams.setOffset(offset);
 
+        //取得 Game List;
         List<ViewGame> viewGameList= gameService.getViewGames(gameQueryParams);
 
-        return ResponseEntity.status(HttpStatus.OK).body(viewGameList);
+        //取得 Game 總數;
+        Integer total = gameService.countGames(gameQueryParams);
+
+        //分頁
+        Page<ViewGame> page = new Page<>();
+        page.setLimit(limit);
+        page.setOffset(offset);
+        page.setTotal(total);
+        page.setResults(viewGameList);
+
+        return ResponseEntity.status(HttpStatus.OK).body(page);
     }
 
     @GetMapping("/games/{gameId}")

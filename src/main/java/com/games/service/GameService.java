@@ -11,6 +11,8 @@ public interface GameService {
 
 //    List<Game> getGames(GameQueryParams gameQueryParams);
 
+    Integer countGames(GameQueryParams gameQueryParams);
+
     List<ViewGame> getViewGames(GameQueryParams gameQueryParams);
 
     ViewGame getViewGameById(Integer ID);
