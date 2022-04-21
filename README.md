@@ -14,3 +14,6 @@
 
  **[相關SQL](https://drive.google.com/drive/folders/1RsXqbnmhLCDZmaoc7bGrLVr_6gr1U20y?usp=sharing)**  
  **問題更新 2021/11/9**
+* 權限部分有想過設計RBAC模型，但此專題先不採用
+ **[相關資料1](https://my.oschina.net/programs/blog/1648205)**
+ **[相關資料2](https://ithelp.ithome.com.tw/questions/10190444)**  
