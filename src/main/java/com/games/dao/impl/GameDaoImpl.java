@@ -31,15 +31,17 @@ public class GameDaoImpl implements GameDao {
         Map<String, Object> map = new HashMap<>();
 
         //查詢條件
-        if (gameQueryParams.getGameLavel() != null) {
-            sql = sql + " AND game_lavel = :gameLavel";
-            map.put("gameLavel", gameQueryParams.getGameLavel().name());
-        }
+//        if (gameQueryParams.getGameLavel() != null) {
+//            sql = sql + " AND game_lavel = :gameLavel";
+//            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+//        }
+//
+//        if (gameQueryParams.getSearch() != null) {
+//            sql = sql + " AND game_name LIKE :search";
+//            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+//        }
 
-        if (gameQueryParams.getSearch() != null) {
-            sql = sql + " AND game_name LIKE :search";
-            map.put("search", "%" + gameQueryParams.getSearch() + "%");
-        }
+        sql = addFilteringSql(sql, map, gameQueryParams);
 
         Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
 
@@ -53,15 +55,17 @@ public class GameDaoImpl implements GameDao {
         Map<String, Object> map = new HashMap<>();
 
         //查詢條件
-        if (gameQueryParams.getGameLavel() != null) {
-            sql = sql + " AND game_lavel = :gameLavel";
-            map.put("gameLavel", gameQueryParams.getGameLavel().name());
-        }
+//        if (gameQueryParams.getGameLavel() != null) {
+//            sql = sql + " AND game_lavel = :gameLavel";
+//            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+//        }
+//
+//        if (gameQueryParams.getSearch() != null) {
+//            sql = sql + " AND game_name LIKE :search";
+//            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+//        }
 
-        if (gameQueryParams.getSearch() != null) {
-            sql = sql + " AND game_name LIKE :search";
-            map.put("search", "%" + gameQueryParams.getSearch() + "%");
-        }
+        sql = addFilteringSql(sql, map, gameQueryParams);
 
         //排序
         sql = sql + " ORDER BY " + gameQueryParams.getOrderBy() + " " + gameQueryParams.getSort();
@@ -96,7 +100,7 @@ public class GameDaoImpl implements GameDao {
     public Game getGameById(Integer gameId) {
         String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE game_id = :gameId";
 
-//        String sql = "SELECT a.game_id, a.game_name, a.game_lavel, b.M_name, a.create_time, c.M_name, a.update_time FROM  game a" +
+//        String sql = "SELECT a.game_id, a.game_name, a.game_lavel, b.M_name, a.create_time, c.M_name, a.update_time FROM game a" +
 //                " INNER JOIN manager b ON a.create_by = b.M_id" +
 //                " INNER JOIN manager c ON a.update_by = c.M_id" +
 //                " WHERE game_id = :gameId";
@@ -160,6 +164,22 @@ public class GameDaoImpl implements GameDao {
         map.put("gameId", gameId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    private String addFilteringSql(String sql, Map<String, Object> map, GameQueryParams gameQueryParams) {
+
+        //查詢條件
+        if (gameQueryParams.getGameLavel() != null) {
+            sql = sql + " AND game_lavel = :gameLavel";
+            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+        }
+
+        if (gameQueryParams.getSearch() != null) {
+            sql = sql + " AND game_name LIKE :search";
+            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+        }
+
+        return sql;
     }
 }
 
