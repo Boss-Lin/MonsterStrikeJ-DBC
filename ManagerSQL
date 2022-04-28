@@ -26,7 +26,7 @@ CREATE TABLE permission (
 );
 
 DELIMITER $$
-CREATE TRIGGER tg_pm035/3103ermission_insert
+CREATE TRIGGER tg_permission_insert
 BEFORE INSERT ON permission
 FOR EACH ROW
 BEGIN
