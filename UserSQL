@@ -1,0 +1,68 @@
+# MonsterStrike
+# MANAGER測試成功
+# SQL指令
+
+Drop table IF EXISTS user_owner;
+Drop table IF EXISTS user;
+Drop table IF EXISTS permission;
+DROP VIEW  IF EXISTS view_user;
+
+---------------------------------------------------
+CREATE TABLE permission (
+    P_id 	INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT "權限ID",
+    P_name	VARCHAR(20) NOT NULL COMMENT "權限名稱",
+    P_spec	VARCHAR(20) COMMENT "權限說明"
+);
+
+INSERT INTO permission (P_name, P_spec) VALUES ('開發者', '我最大');
+INSERT INTO permission (P_name, P_spec) VALUES ('網站管理者', '我老二');
+INSERT INTO permission (P_name, P_spec) VALUES ('小編', '我老三');
+INSERT INTO permission (P_name, P_spec) VALUES ('斗內使用者', '乾爹');
+INSERT INTO permission (P_name, P_spec) VALUES ('一般使用者', '平名百姓');
+
+------------------------------------
+#使用者USER
+CREATE TABLE user (
+    U_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT "使用者ID",
+    U_email VARCHAR(20) NOT NULL COMMENT "帳號",
+    U_password VARCHAR(20) NOT NULL COMMENT "密碼",
+    U_name VARCHAR(20) NOT NULL COMMENT "使用者名稱",
+    State tinyint(4) NOT NULL DEFAULT '1' COMMENT "狀態 1/正常",
+    Line_id VARCHAR(20) ,
+    Line_url VARCHAR(20) ,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT "建立時間",
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT "修改時間"
+);
+
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('123456@gmail.com', '123456', '大翔', '123456', null);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('system@gmail.com', 'system', 'SYSTEM', 'system', null);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('test1@gmail.com', 'test1', 'TEST1', 'test1', null);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('test2@gmail.com', 'test2', 'TEST2', 'test2', null);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('test3@gmail.com', 'test3', 'TEST3', 'test3', null);
+
+------------------------------------
+#擁有權限(User)
+CREATE TABLE user_owner (
+	U_id	INT NOT NULL,
+    P_id	INT NOT NULL,
+    PRIMARY KEY(U_id, P_id),
+    constraint fk_user_owner_user foreign key (U_id) references user(U_id),
+    constraint fk_user_owner_permission foreign key (P_id) references permission(P_id)
+);
+
+INSERT INTO user_owner (U_id, P_id) VALUES (1, 1);
+INSERT INTO user_owner (U_id, P_id) VALUES (2, 2);
+INSERT INTO user_owner (U_id, P_id) VALUES (3, 3);
+INSERT INTO user_owner (U_id, P_id) VALUES (4, 4);
+INSERT INTO user_owner (U_id, P_id) VALUES (5, 5);
+------------------------------------
+#View表(user) 權限
+CREATE OR REPLACE VIEW view_user (
+U_id, U_email, U_password, U_name, P_name, State, Line_id, Line_url, create_time, update_time) AS
+SELECT 
+b.U_id, b.U_email, b.U_password, b.U_name, c.P_name, b.State, b.Line_id, b.Line_url, b.create_time, b.update_time
+FROM user_owner a
+INNER JOIN user b		ON a.U_id = b.U_id
+INNER JOIN permission c		ON a.P_id = c.P_id
+order by U_id asc
+;
