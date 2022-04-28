@@ -27,6 +27,8 @@ public class GameRowmapper implements RowMapper<Game> {
         game.setUpdateBY(resultSet.getInt("update_by"));
         game.setUpdateTime(resultSet.getTimestamp("update_time"));
 
+//        game.setCreateName(resultSet.getString("create_name"));
+//        game.setUpdateName(resultSet.getString("update_name"));
         return game;
     }
 }

@@ -4,6 +4,7 @@ import com.games.dao.GameDao;
 import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
+import com.games.model.ViewGame;
 import com.games.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,9 +17,25 @@ public class GameServiceImpl implements GameService {
     @Autowired
     private GameDao gameDao;
 
+//    @Override
+//    public List<Game> getGames(GameQueryParams gameQueryParams) {
+//        return gameDao.getGames(gameQueryParams);
+//    }
+
+
     @Override
-    public List<Game> getGames(GameQueryParams gameQueryParams) {
-        return gameDao.getGames(gameQueryParams);
+    public Integer countGames(GameQueryParams gameQueryParams) {
+        return gameDao.countGames(gameQueryParams);
+    }
+
+    @Override
+    public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
+        return gameDao.getViewGames(gameQueryParams);
+    }
+
+    @Override
+    public ViewGame getViewGameById(Integer gameId) {
+        return gameDao.getViewGameById(gameId);
     }
 
     @Override

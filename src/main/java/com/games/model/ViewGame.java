@@ -8,15 +8,13 @@ import java.sql.Timestamp;
 
 @Getter
 @Setter
-public class Game {
+public class ViewGame {
+
     private Integer gameId;
     private String gameName;
     private GameCategory gameLavel;
-    private Integer createBY;
+    private String createName;
     private Timestamp createTime;
-    private Integer updateBY;
+    private String updateName;
     private Timestamp updateTime;
-
-//    private String createName;
-//    private String updateName;
 }

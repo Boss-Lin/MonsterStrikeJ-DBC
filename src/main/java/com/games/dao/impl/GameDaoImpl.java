@@ -4,7 +4,9 @@ import com.games.dao.GameDao;
 import com.games.dto.GameQueryParams;
 import com.games.dto.GameRequest;
 import com.games.model.Game;
+import com.games.model.ViewGame;
 import com.games.rowmapper.GameRowmapper;
+import com.games.rowmapper.ViewGameRowmapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,31 +25,85 @@ public class GameDaoImpl implements GameDao {
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Override
-    public List<Game> getGames(GameQueryParams gameQueryParams) {
-        String sql ="SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE 1=1";
+    public Integer countGames(GameQueryParams gameQueryParams) {
+        String sql = "SELECT count(*) FROM view_game WHERE 1=1";
 
         Map<String, Object> map = new HashMap<>();
 
-        if (gameQueryParams.getGameLavel() != null) {
-            sql = sql + " AND game_lavel = :gameLavel";
-            map.put("gameLavel", gameQueryParams.getGameLavel().name());
-        }
+        //查詢條件
+//        if (gameQueryParams.getGameLavel() != null) {
+//            sql = sql + " AND game_lavel = :gameLavel";
+//            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+//        }
+//
+//        if (gameQueryParams.getSearch() != null) {
+//            sql = sql + " AND game_name LIKE :search";
+//            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+//        }
 
-        if (gameQueryParams.getSearch() != null) {
-            sql = sql + " AND game_name LIKE :search";
-            map.put("search", "%" + gameQueryParams.getSearch() + "%");
-        }
+        sql = addFilteringSql(sql, map, gameQueryParams);
 
+        Integer total = namedParameterJdbcTemplate.queryForObject(sql, map, Integer.class);
+
+        return total;
+    }
+
+    @Override
+    public List<ViewGame> getViewGames(GameQueryParams gameQueryParams) {
+        String sql ="SELECT game_id, game_name, game_lavel, create_name, create_time, update_name, update_time FROM monsterstrike.view_game WHERE 1=1";
+
+        Map<String, Object> map = new HashMap<>();
+
+        //查詢條件
+//        if (gameQueryParams.getGameLavel() != null) {
+//            sql = sql + " AND game_lavel = :gameLavel";
+//            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+//        }
+//
+//        if (gameQueryParams.getSearch() != null) {
+//            sql = sql + " AND game_name LIKE :search";
+//            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+//        }
+
+        sql = addFilteringSql(sql, map, gameQueryParams);
+
+        //排序
         sql = sql + " ORDER BY " + gameQueryParams.getOrderBy() + " " + gameQueryParams.getSort();
 
-        List<Game> gameList = namedParameterJdbcTemplate.query(sql, map, new GameRowmapper());
+        //分頁
+        sql = sql + " LIMIT :limit OFFSET :offset";
+        map.put("limit", gameQueryParams.getLimit());
+        map.put("offset", gameQueryParams.getOffset());
 
-        return gameList;
+        List<ViewGame> viewGameList = namedParameterJdbcTemplate.query(sql, map, new ViewGameRowmapper());
+
+        return viewGameList;
+    }
+
+    @Override
+    public ViewGame getViewGameById(Integer gameId) {
+        String sql = "SELECT game_id, game_name, game_lavel, create_name, create_time, update_name, update_time FROM monsterstrike.view_game WHERE game_id = :gameId";
+
+        Map<String, Object> map = new HashMap<>();
+        map.put("gameId", gameId);
+
+        List<ViewGame> viewGameList = namedParameterJdbcTemplate.query(sql, map, new ViewGameRowmapper());
+
+        if (viewGameList.size() > 0 ) {
+            return viewGameList.get(0);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public Game getGameById(Integer gameId) {
         String sql = "SELECT game_id, game_name, game_lavel, create_by, create_time, update_by, update_time FROM game WHERE game_id = :gameId";
+
+//        String sql = "SELECT a.game_id, a.game_name, a.game_lavel, b.M_name, a.create_time, c.M_name, a.update_time FROM game a" +
+//                " INNER JOIN manager b ON a.create_by = b.M_id" +
+//                " INNER JOIN manager c ON a.update_by = c.M_id" +
+//                " WHERE game_id = :gameId";
 
         Map<String, Object> map = new HashMap<>();
         map.put("gameId", gameId);
@@ -108,6 +164,22 @@ public class GameDaoImpl implements GameDao {
         map.put("gameId", gameId);
 
         namedParameterJdbcTemplate.update(sql, map);
+    }
+
+    private String addFilteringSql(String sql, Map<String, Object> map, GameQueryParams gameQueryParams) {
+
+        //查詢條件
+        if (gameQueryParams.getGameLavel() != null) {
+            sql = sql + " AND game_lavel = :gameLavel";
+            map.put("gameLavel", gameQueryParams.getGameLavel().name());
+        }
+
+        if (gameQueryParams.getSearch() != null) {
+            sql = sql + " AND game_name LIKE :search";
+            map.put("search", "%" + gameQueryParams.getSearch() + "%");
+        }
+
+        return sql;
     }
 }
 
