@@ -1,8 +1,17 @@
+# MonsterStrike
+# MANAGER測試成功
+# SQL指令
+
 Drop table IF EXISTS manager_owner;
 Drop table IF EXISTS manager;
-Drop table IF EXISTS permission;
+Drop table IF EXISTS user_owner;
+Drop table IF EXISTS user;
+Drop table IF EXISTS manager;
+Drop table IF EXISTS manager_owner;
 Drop table IF EXISTS permission_seq;
+Drop table IF EXISTS permission;
 DROP VIEW  IF EXISTS view_manager;
+DROP VIEW  IF EXISTS view_user;
 
 ---------------------------------------------------
 #權限PERMISSION
@@ -17,7 +26,7 @@ CREATE TABLE permission (
 );
 
 DELIMITER $$
-CREATE TRIGGER tg_permission_insert
+CREATE TRIGGER tg_pm035/3103ermission_insert
 BEFORE INSERT ON permission
 FOR EACH ROW
 BEGIN
@@ -39,7 +48,7 @@ CREATE TABLE manager (
     M_email VARCHAR(20) NOT NULL COMMENT "帳號",
     M_password VARCHAR(20) NOT NULL COMMENT "密碼",
     M_name VARCHAR(20) NOT NULL COMMENT "管理員名稱",
-    state tinyint(4) NOT NULL DEFAULT '1' COMMENT "狀態 1/正常",
+    State tinyint(4) NOT NULL DEFAULT '1' COMMENT "狀態 1/正常",
     Line_id VARCHAR(20) ,
     Line_url VARCHAR(20) ,
     create_by 	VARCHAR(30) COMMENT "建立者",
@@ -65,11 +74,51 @@ INSERT INTO manager_owner (M_id, P_id) VALUES (2, 'p02');
 ---------------------------------------------------
 #View表(manager) 權限
 CREATE OR REPLACE VIEW view_manager (
-M_id, M_email, M_password, M_name, P_name, state, Line_id, Line_url, create_by, create_time, update_time) AS
+M_id, M_email, M_password, M_name, P_name, State, Line_id, Line_url, create_by, create_time, update_time) AS
 SELECT 
-b.M_id, b.M_email, b.M_password, b.M_name, c.P_name, b.state, b.Line_id, b.Line_url, b.create_by, b.create_time, b.update_time
+b.M_id, b.M_email, b.M_password, b.M_name, c.P_name, b.State, b.Line_id, b.Line_url, b.create_by, b.create_time, b.update_time
 FROM manager_owner a
 INNER JOIN manager b		ON a.M_id = b.M_id
 INNER JOIN permission c		ON a.P_id = c.P_id
 order by M_id asc
+;
+
+------------------------------------
+#使用者USER
+CREATE TABLE user (
+    U_id INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT "使用者ID",
+    U_email VARCHAR(20) NOT NULL COMMENT "帳號",
+    U_password VARCHAR(20) NOT NULL COMMENT "密碼",
+    U_name VARCHAR(20) NOT NULL COMMENT "使用者名稱",
+    State tinyint(4) NOT NULL DEFAULT '1' COMMENT "狀態 1/正常",
+    Line_id VARCHAR(20) ,
+    Line_url VARCHAR(20) ,
+    create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT "建立時間",
+    update_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP NOT NULL COMMENT "修改時間"
+);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('123456@gmail.com', '123456', 'USER大翔', '123456', null);
+INSERT INTO user (U_email, U_password, U_name, Line_id, Line_url) VALUES ('123456@gmail.com', '123456', 'USER小翔', '123456', null);
+
+------------------------------------
+#擁有權限(User)
+CREATE TABLE user_owner (
+	U_id	INT NOT NULL,
+    P_id	VARCHAR(20) NOT NULL,
+    PRIMARY KEY(U_id, P_id),
+    constraint fk_user_owner_user foreign key (U_id) references user(U_id),
+    constraint fk_user_owner_permission foreign key (P_id) references permission(P_id)
+);
+
+INSERT INTO user_owner (U_id, P_id) VALUES (1, 'p04');
+INSERT INTO user_owner (U_id, P_id) VALUES (2, 'p05');
+------------------------------------
+#View表(user) 權限
+CREATE OR REPLACE VIEW view_user (
+U_id, U_email, U_password, U_name, P_name, State, Line_id, Line_url, create_time, update_time) AS
+SELECT 
+b.U_id, b.U_email, b.U_password, b.U_name, c.P_name, b.State, b.Line_id, b.Line_url, b.create_time, b.update_time
+FROM user_owner a
+INNER JOIN user b		ON a.U_id = b.U_id
+INNER JOIN permission c		ON a.P_id = c.P_id
+order by U_id asc
 ;
