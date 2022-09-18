@@ -2,6 +2,7 @@ package com.users.controller;
 
 import com.games.util.Page;
 import com.users.constant.UserCategory;
+import com.users.dto.UserLoginRequest;
 import com.users.dto.UserQueryParams;
 import com.users.dto.UserRequest;
 import com.users.model.User;
@@ -21,7 +22,10 @@ import java.util.List;
 @Validated
 @RestController
 public class UserController {
-
+/**
+ * @RequestBody 表示要去接住前端傳過來的json參數
+ * @Valid 表示驗證 Post請求的request body參數
+ */
     @Autowired
     private UserService userService;
 
@@ -36,4 +40,11 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(user);
     }
 
+//    登入
+    @PostMapping("/users/login")
+    public ResponseEntity<User> login(@RequestBody @Valid UserLoginRequest userLoginRequest) {
+        User user = userService.login(userLoginRequest);
+
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
 }
