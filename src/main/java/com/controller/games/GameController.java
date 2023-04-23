@@ -109,7 +109,8 @@ public class GameController {
         //修改Game的數據
         gameService.updateGame(gameId, gameRequest);
 
-        Game updateGame = gameService.getGameById(gameId);//更新後查看更新後的資料
+        //更新後查看更新後的資料
+        Game updateGame = gameService.getGameById(gameId);
 
         return ResponseEntity.status(HttpStatus.OK).body(updateGame);
     }
