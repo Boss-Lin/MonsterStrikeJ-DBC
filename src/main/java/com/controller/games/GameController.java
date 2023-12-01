@@ -88,7 +88,7 @@ public class GameController {
 //        }
 //    }
 
-    @PostMapping("/addgames")
+    @PostMapping("/createGame")
     public ResponseEntity<Game> createGame(@RequestBody @Valid GameRequest gameRequest) {
         Integer gameId = gameService.createGame(gameRequest);
 
@@ -97,7 +97,7 @@ public class GameController {
         return ResponseEntity.status(HttpStatus.CREATED).body(game);
     }
 
-    @PutMapping("/updategames/{gameId}")
+    @PutMapping("/updateGame/{gameId}")
     public ResponseEntity<Game> updateGame(@PathVariable Integer gameId, @RequestBody @Valid GameRequest gameRequest) {
 
         //檢查game是否存在
@@ -115,7 +115,7 @@ public class GameController {
         return ResponseEntity.status(HttpStatus.OK).body(updateGame);
     }
 
-    @DeleteMapping("/deletegames/{gameId}")
+    @DeleteMapping("/deleteGame/{gameId}")
     public ResponseEntity<?> deleteGame(@PathVariable Integer gameId) {
         gameService.deleteGameById(gameId);
 
