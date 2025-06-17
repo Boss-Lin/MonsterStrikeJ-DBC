@@ -5,7 +5,7 @@ DROP VIEW  IF EXISTS view_game;
 CREATE TABLE IF NOT EXISTS game (
 	game_id 			INT 		NOT NULL	PRIMARY KEY 	AUTO_INCREMENT COMMENT "編號",
     game_name	VARCHAR(128)NOT NULL COMMENT "關卡名稱",
-	game_lavel 	VARCHAR(30) NOT NULL COMMENT "關卡難度",
+	game_level 	VARCHAR(30) NOT NULL COMMENT "關卡難度",
 	create_by 	INT NOT NULL COMMENT "建立者",
 	create_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL COMMENT "建立時間",
 	update_by 	INT NOT NULL COMMENT "修改者",
@@ -14,128 +14,128 @@ CREATE TABLE IF NOT EXISTS game (
     constraint fk_game_update foreign key (update_by) references manager(M_id)
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '戰慄之愛【轟絕・極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '戰慄之愛【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '嗤笑悲劇【轟絕・極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '嗤笑悲劇【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '勇姿禮讚【轟絕・極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '勇姿禮讚【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '狂怒之命【轟絕・極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '狂怒之命【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '驚天之刻【轟絕・極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '驚天之刻【轟絕・究極】','轟絕', 1, 1
 );
 
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '美好嚴律【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '似是悖謬【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '輝煌劣等【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '猛烈對立【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '顯露真貌【轟絕・究極】','轟絕', 1, 1
 );
 
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '解放的鎮魂曲【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '伴隨的夜想曲【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '奉獻的小夜曲【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '歸結的獨唱曲【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '連綴的進行曲【轟絕・究極】','轟絕', 1, 1
 );
 
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '熱切的裁斷【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '快樂的謊報【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '誠實的分類【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '欣喜的漠視【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '喜悅的不公【轟絕・究極】','轟絕', 1, 1
 );
 
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '飢餓的執著【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '深沉的情慢【轟絕・究極】','轟絕', 1, 1
 );
 INSERT INTO `monsterstrike`.`game` (
-`game_name`, `game_lavel`, `create_by`, `update_by`) VALUES (
+`game_name`, `game_level`, `create_by`, `update_by`) VALUES (
 '同等的均一【轟絕・究極】','轟絕', 1, 1
 );
 
 ---------------------------------------------------
 #View表(game) 關卡
 CREATE OR REPLACE VIEW view_game (
-game_id, game_name, game_lavel, create_by, create_time, update_by, update_time) AS
+game_id, game_name, game_level, create_by, create_time, update_by, update_time) AS
 SELECT 
-a.game_id, a.game_name, a.game_lavel, b.M_name, a.create_time, c.M_name, a.update_time
+a.game_id, a.game_name, a.game_level, b.M_name, a.create_time, c.M_name, a.update_time
 FROM  game a
 INNER JOIN manager b		ON a.create_by = b.M_id
 INNER JOIN manager c		ON a.update_by = c.M_id
