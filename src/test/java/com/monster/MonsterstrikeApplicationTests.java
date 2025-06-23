@@ -16,7 +16,7 @@ class MonsterstrikeApplicationTests {
 	private GameJpaDao gameJpaDao;
 
 	@Test
-	void contextLoads() {
+	void testGameJpa() {
 		List<Game> gameTest = gameJpaDao.findByGameId(1);
 		System.out.println("成功" + gameTest);
 	}
