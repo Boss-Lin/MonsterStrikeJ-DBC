@@ -1,6 +1,6 @@
 package com.dao.impl;
 
-import com.dao.GameDao;
+import com.dao.GameJdbcDao;
 import com.dto.GameQueryParams;
 import com.dto.GameRequest;
 import com.model.Game;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class GameDaoImpl implements GameDao {
+public class GameJdbcDaoImpl implements GameJdbcDao {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

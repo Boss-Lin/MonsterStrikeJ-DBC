@@ -1,6 +1,6 @@
 package com.dao.impl;
 
-import com.dao.UserDao;
+import com.dao.UserJdbcDao;
 import com.dto.UserRequest;
 import com.model.User;
 import com.rowmapper.UserRowmapper;
@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
-public class UserDaoImpl implements UserDao {
+public class UserJdbcDaoImpl implements UserJdbcDao {
 
     @Autowired
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;

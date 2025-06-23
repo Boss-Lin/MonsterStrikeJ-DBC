@@ -1,6 +1,6 @@
 package com.service.impl;
 
-import com.dao.GameDao;
+import com.dao.GameJdbcDao;
 import com.dto.GameQueryParams;
 import com.dto.GameRequest;
 import com.model.Game;
@@ -16,7 +16,7 @@ import java.util.List;
 public class GameServiceImpl implements GameService {
 
     @Autowired
-    private GameDao gameDao;
+    private GameJdbcDao gameDao;
 
 //    @Override
 //    public List<Game> getGames(GameQueryParams gameQueryParams) {

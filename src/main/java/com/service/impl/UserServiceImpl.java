@@ -1,6 +1,6 @@
 package com.service.impl;
 
-import com.dao.UserDao;
+import com.dao.UserJdbcDao;
 import com.dto.UserLoginRequest;
 import com.dto.UserRequest;
 import com.model.User;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     private final static Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
-    private UserDao userDao;
+    private UserJdbcDao userDao;
 
     @Override
     public User getUserById(Integer userId) {

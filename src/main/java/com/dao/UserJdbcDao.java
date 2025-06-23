@@ -4,7 +4,7 @@ import com.dto.UserRequest;
 import com.model.User;
 
 
-public interface UserDao {
+public interface UserJdbcDao {
 
     User getUserById(Integer userId);
 

@@ -7,7 +7,7 @@ import com.model.ViewGame;
 
 import java.util.List;
 
-public interface GameDao {
+public interface GameJdbcDao {
 
 //    List<Game> getGames(GameQueryParams gameQueryParams);
 
